@@ -1,0 +1,8 @@
+${AnsiColor.GREEN}            _   _   ____   _____   ${AnsiColor.CYAN}  _____  _    _         _______  ${AnsiColor.YELLOW}  ____    ____  _______
+${AnsiColor.GREEN}     /\    | \ | | / __ \ |  __ \  ${AnsiColor.CYAN} / ____|| |  | |    /\ |__   __| ${AnsiColor.YELLOW} |  _ \  / __ \|__   __|
+${AnsiColor.GREEN}    /  \   |  \| || |  | || |__) | ${AnsiColor.CYAN}| |     | |__| |   /  \   | |    ${AnsiColor.YELLOW} | |_) || |  | |  | |
+${AnsiColor.GREEN}   / /\ \  | . ` || |  | ||  _  /  ${AnsiColor.CYAN}| |     |  __  |  / /\ \  | |    ${AnsiColor.YELLOW} |  _ < | |  | |  | |
+${AnsiColor.GREEN}  / ____ \ | |\  || |__| || | \ \  ${AnsiColor.CYAN}| |____ | |  | | / ____ \ | |    ${AnsiColor.YELLOW} | |_) || |__| |  | |
+${AnsiColor.GREEN} /_/    \_\|_| \_| \____/ |_|  \_\ ${AnsiColor.CYAN} \_____||_|  |_|/_/    \_\|_|    ${AnsiColor.YELLOW} |____/  \____/   |_|
+${AnsiColor.RED}:: Running Spring Boot ${spring-boot.version} ::
+:: https://www.anorbank.uz  Sahobiddin Abbosaliyev ::${AnsiColor.DEFAULT}
