@@ -21,13 +21,13 @@ public class AutoCredit {
         autoCredit.add("https://www.anorbank.uz/upload/img/punkt/avtokredit.png"); //image
 
         if (lang.equals("uz")) {
-            autoCredit.add("Avtokredit xizmati ikkilamchi bozordan xarid uchun taqdim etiladi. Muddati 36 oy bo'ladi. Yillik 23%. Boshlang’ich to’lov 30%. Rasmiylashtirish uchun bosh ofisimizga (agar Toshkent shaxrida bo'lsangiz) yoki viloyatlarda joylashgan tayanch punktlarimizga murojaat qilishingiz mumkin \n+998555030000 \n 1290");
+            autoCredit.add("Avtokredit xizmati ikkilamchi bozordan xarid uchun taqdim etiladi. Muddati 36 oy bo'ladi. Yillik 23%. Boshlang’ich to’lov 30%. Rasmiylashtirish uchun bosh ofisimizga (agar Toshkent shaxrida bo'lsangiz) yoki viloyatlarda joylashgan tayanch punktlarimizga murojaat qilishingiz mumkin. Savollar bo`yicha quyidagi raqamlarga murojaat qilishingiz mumkin: \n +998555030000 \n 1290");
         } else if (lang.equals("en")) {
             autoCredit.add("The car loan service is provided for purchase on the secondary market. The term will be 36 months. 23% per annum. The initial payment is 30%. For registration, you can contact our head office (if you are located in Tashkent) or our branches are located in the central cities of the regions.\n+998555030000 \n 1290");
 
         } else
 
-        autoCredit.add("Услуга автокредита предоставляется для покупки на вторичном рынке. Срок составит 36 месяцев. 23% годовых. Первоначальный взнос 30%. Для оформления вы можете обратиться в наш головной офис (если вы находитесь в г. Ташкенте) или в наши базовые пункты, расположенные в регионах. Вы можете написать, если у вас есть дополнительные вопросы.\n+998555030000 \n 1290");//<p>
+        autoCredit.add("Услуга автокредита предоставляется для покупки на вторичном рынке. Срок составит 36 месяцев. 23% годовых. Первоначальный взнос 30%. Для оформления вы можете обратиться в наш головной офис (если вы находитесь в г. Ташкенте) или в наши опорные пункты, расположенные в регионах. Если у вас есть дополнительные вопросы, позвоните по номеру: \n +998555030000 \n 1290");//<p>
         return autoCredit;
 
 

@@ -33,7 +33,6 @@ public class MainBotService extends TelegramLongPollingBot implements BaseBotSer
     private Long userChatId;
     private String userMessage;
     private String rank;
-
     private final static Map<Long, String> map = new HashMap<>();
     private final UserService userService;
 
@@ -70,6 +69,10 @@ public class MainBotService extends TelegramLongPollingBot implements BaseBotSer
                     update.getMessage().setText(map.get(userChatId) != null && map.get(userChatId) != "" ? map.get(userChatId) : "/start");
                     onUpdateReceived(update);
                     break;
+                    case "Скоро...":
+                    update.getMessage().setText(map.get(userChatId) != null && map.get(userChatId) != "" ? map.get(userChatId) : "/start");
+                    onUpdateReceived(update);
+                    break;
                 case "Консультация":
                     userMessage = "Ваш правовой статус?";
                     execute(createMarkupButtons("Физическое лицо", "Юридическое лицо", "Назад"), null);
@@ -88,6 +91,8 @@ public class MainBotService extends TelegramLongPollingBot implements BaseBotSer
 
                 case "Не получил ответ на вопрос":
                     userMessage = "Для того, чтобы с вами связались специалисты контакт-центра отправьте свой телефонный номер как контакт!";
+                    update.getMessage().setText("Позвоните мне");
+                    onUpdateReceived(update);
                     break;
 ////
 //                case "a":
@@ -179,12 +184,15 @@ public class MainBotService extends TelegramLongPollingBot implements BaseBotSer
 
                 case "Оставить отзыв/предложение":
                     userMessage = "Оставить отзыв/предложение";
-                    execute(createMarkupButtons("Все понравилось на 5", "Нормально на 4", "Удовлетворительно на 3", "Не понравилось на 2", "Хочу пожаловаться", "Назад"), null);//todo davomi bor
+                    execute(createMarkupButtons(  "Скоро..."), null);//todo davomi bor
                     map.put(userChatId, "Обратная связь");
                     break;
                 case "Сервис банка":
                     userMessage = "Оставьте отзыв в виде текстого или аудиосообщения";
                     execute(createMarkupButtons("Отправить", "Назад"), null);//todo davomi bor
+                    executeGroup(update, rank);
+
+
                     map.put(userChatId, "Хочу пожаловаться");
                     rank = "Сервис банка";
                     break;
@@ -213,7 +221,7 @@ public class MainBotService extends TelegramLongPollingBot implements BaseBotSer
                     onUpdateReceived(update);
                     break;
                 case "Удовлетворительно на 3":
-                    rank = "Нормально на 4";
+                    rank = "Удовлетворительно на 3";
                     userMessage = "Отменить заявку";
                     update.getMessage().setText("Хочу пожаловаться");
                     onUpdateReceived(update);
@@ -233,6 +241,7 @@ public class MainBotService extends TelegramLongPollingBot implements BaseBotSer
                     userMessage = "Отправлено! \n Спасибо за отзыв ";
                     execute(createMarkupButtons("Назад"), null);//todo davomi bor
 
+
                     executeGroup(update, rank);
 
                     map.put(userChatId, "/start");
@@ -251,7 +260,7 @@ public class MainBotService extends TelegramLongPollingBot implements BaseBotSer
                         shareContact(sendMessage, "");
                         map.put(userChatId, "Позвоните мне");
                     } else {
-                        String message = user1.getUsername() + " " + user1.getPhoneNumber() + "  " + "  Клиент попросил операторов позвонить !";
+                        String message = user1.getUsername() + "\n" + user1.getPhoneNumber() + "\n\n" + update.getMessage().getText();
                         userMessage = "Операторы скоро вам перезвонят";
                         String groupChatId = this.groupChatId;
                         execute(groupChatId, message);
@@ -385,8 +394,10 @@ public class MainBotService extends TelegramLongPollingBot implements BaseBotSer
                     map.put(userChatId, "Адреса опорных пунктов(Регионы)");
                     break;
                 case "Адреса торговых точек":
-                    userMessage = "Адреса торговых точек"; //todo https://www.anorbank.uz/atms/#sales
+                    userMessage = "Адреса торговых точек";
                     execute(createMarkupButtons("Назад"), null);
+                    List<String> addressOfficeg = ATMSServices.getATMS("");
+                    execute(addressOfficeg.get(0), addressOfficeg.get(1), addressOfficeg.get(2), addressOfficeg.get(3));
                     map.put(userChatId, "Адреса");
                     break;
                 /****************************************************Карты*********************************************/
@@ -611,6 +622,11 @@ public class MainBotService extends TelegramLongPollingBot implements BaseBotSer
                     update.getMessage().setText(map.get(userChatId) != null && map.get(userChatId) != "" ? map.get(userChatId) : "/start");
                     onUpdateReceived(update);
                     break;
+
+                    case "Tez kunda...":
+                    update.getMessage().setText(map.get(userChatId) != null && map.get(userChatId) != "" ? map.get(userChatId) : "/start");
+                    onUpdateReceived(update);
+                    break;
                 case "Maslahat":
                     userMessage = "Sizning huquqiy maqomingiz qanday?";
                     execute(createMarkupButtons("Jismoniy shaxs", "Yuridik shaxs", "Orqaga"), null);
@@ -623,7 +639,8 @@ public class MainBotService extends TelegramLongPollingBot implements BaseBotSer
                     break;
                 case "Savolingizga javob olmadingizmi ?":
                     userMessage = "Savolingizga javob olmadingizmi ?";
-                    execute(createMarkupButtons("hello"), null);//todo davomi bor
+                    update.getMessage().setText("Menga qo'ng'iroq qiling");
+                    onUpdateReceived(update);
                     break;
                 case "Manzillar":
                     userMessage = "Manzillar";
@@ -644,8 +661,6 @@ public class MainBotService extends TelegramLongPollingBot implements BaseBotSer
                     execute(addressOfficeg1.get(0), addressOfficeg1.get(1), addressOfficeg1.get(2), addressOfficeg1.get(3));
                     map.put(userChatId,"Manzillar");
                     break;
-
-
                 case "Tasdiqlash":      //todo manashu case ni bossa contactni share qilishi kerak
                     userMessage = "Iloji boricha tezroq aloqa markazi mutaxassisi qo'shimcha maslahat olish uchun siz bilan bog'lanadi";
                     execute(createMarkupButtons("Orqaga"), null);
@@ -656,7 +671,6 @@ public class MainBotService extends TelegramLongPollingBot implements BaseBotSer
                     update.getMessage().setText("Aloqa");
                     onUpdateReceived(update);
                     break;
-
                 case "Aloqa":
                     userMessage = "Aloqa";
                     execute(createMarkupButtons("Menga qo'ng'iroq qiling", "Fikr/taklif qoldiring", "Tijorat taklif", "Bank bo'sh ish o'rinlari", "Orqaga"), null);
@@ -678,8 +692,7 @@ public class MainBotService extends TelegramLongPollingBot implements BaseBotSer
                     break;
                 case "Fikr/taklif qoldiring":
                     userMessage = "Fikr/taklif qoldiring";
-                    execute(createMarkupButtons("Hamma narsa yoqdi 5", "Yaxshi 4", "Qoniqarli 3", "Yoqmadi 2", "\n" +
-                            "Men shikoyat qilmoqchiman", "Orqaga"), null);//todo davomi bor
+                    execute(createMarkupButtons( "Tez kunda..."), null);//todo davomi bor
                     map.put(userChatId,"Aloqa");
                     break;
                 case "Bank xizmati":
@@ -727,27 +740,31 @@ public class MainBotService extends TelegramLongPollingBot implements BaseBotSer
                     execute(createMarkupButtons("Orqaga"), null);//todo davomi bor
                     map.put(userChatId,"/start");
                     break;
-//                case "Menga qo'ng'iroq qiling":
+                case "Menga qo'ng'iroq qiling":
 //                    // todo telefon raqamga tekshirish
-//                    Optional<User> userUz = userService.findUserByChatId(update);
-//                    User user2 = new User();
-//                    if (userUz.isPresent()){
-//                        user2 = userUz.get();
-//                    }
-//
-//                    if (user2.getPhoneNumber() == null || user2.getPhoneNumber().equals("") || user2.getPhoneNumber().trim().equals("")){
-//                        sendMessage = new SendMessage();
-//                        sendMessage.setChatId(String.valueOf(userChatId));
-//                        sendMessage.setText("telefon raqamingizni yuoring");
-//                        shareContact(sendMessage);
-//                    } else {
-//                        String message = user2.getUsername() + " " + user2.getPhoneNumber() + "Bot xabarni guruhga jo`natadigan bo`ldi !!!";
-//                        SendGroupMessage.doInBackground(message);
-//                        userMessage = "sps";
-//                        execute();
-//                    }
-//                    map.put(userChatId,"Aloqa");
-//                    break;
+
+                Optional<User> userUz = userService.findUserByChatId(update);
+                User user2 = new User();
+                if (userUz.isPresent()){
+                    user2 = userUz.get();
+                }
+                if (user2.getPhoneNumber() == null || user2.getPhoneNumber().equals("") || user2.getPhoneNumber().trim().equals("")){
+                    SendMessage sendMessage = new SendMessage();
+                    sendMessage.setChatId(String.valueOf(userChatId));
+                    sendMessage.setText("Telefon raqamingizni yuboring");
+                    shareContact(sendMessage, "uz");
+                    map.put(userChatId, "Menga qo'ng'iroq qiling");
+                } else {
+                    String message = user2.getUsername() + "\n" + user2.getPhoneNumber() + "\n\n" + update.getMessage().getText();
+                    userMessage = "Operatorlar tez orada sizga aloqaga chiqishadi";
+                    String groupChatId = this.groupChatId;
+                    execute(groupChatId, message);
+                    execute(new SendMessage(String.valueOf(this.userChatId), userMessage));
+                    //backStepMessage = "\uD83C\uDDF7\uD83C\uDDFA Русский";
+                    update.getMessage().setText("Aloqa");
+                    onUpdateReceived(update);
+                }
+                break;
 
 
 
@@ -1095,6 +1112,10 @@ public class MainBotService extends TelegramLongPollingBot implements BaseBotSer
                     update.getMessage().setText(map.get(userChatId) != null && map.get(userChatId) != "" ? map.get(userChatId) : "/start");
                     onUpdateReceived(update);
                     break;
+                    case "Soon...":
+                    update.getMessage().setText(map.get(userChatId) != null && map.get(userChatId) != "" ? map.get(userChatId) : "/start");
+                    onUpdateReceived(update);
+                    break;
                 case "Consultation":
                     userMessage = "Your legal status?";
                     execute(createMarkupButtons("Individuals", "Legal entities", "Back"), null);
@@ -1108,13 +1129,15 @@ public class MainBotService extends TelegramLongPollingBot implements BaseBotSer
                     break;
                 case "Did not receive an answer to the question ?":
                     userMessage = "Did not receive an answer to the question ?";
-                    execute(createMarkupButtons("hello"), null);//todo davomi bor
+                    update.getMessage().setText("Call me");
+                    onUpdateReceived(update);
                     break;
                 case "Addresses":
                     userMessage = "Addresses";
                     execute(createMarkupButtons("Main office address", "Addresses of strongholds (Regions)", "Addresses of retail outlets", "Back"), null);
                     map.put(userChatId,"Individuals");
                     break;
+
                 case "Main office address":
                     userMessage = "Main office address";
                     execute(createMarkupButtons("Back"), null);
@@ -1124,8 +1147,10 @@ public class MainBotService extends TelegramLongPollingBot implements BaseBotSer
                     break;
 
                 case "Addresses of retail outlets":
-                    userMessage = "Addresses of retail outlets"; //todo https://www.anorbank.uz/atms/#sales
+                    userMessage = "Addresses of retail outlets";
                     execute(createMarkupButtons("Back"), null);
+                    List<String> addressOfficeg3 = ATMSServices.getATMS("en");
+                    execute(addressOfficeg3.get(0), addressOfficeg3.get(1), addressOfficeg3.get(2), addressOfficeg3.get(3));
                     map.put(userChatId,"Addresses");
                     break;
 
@@ -1135,6 +1160,38 @@ public class MainBotService extends TelegramLongPollingBot implements BaseBotSer
                     execute(createMarkupButtons("Call me", "Leave a review/suggestion", "Commercial proposal", "Bank vacancies", "Back"), null);
                     map.put(userChatId, "\uD83C\uDDEC\uD83C\uDDE7 English");
                     break;
+
+                case"Leave a review/suggestion":
+                    userMessage = "Leave a review/suggestion";
+                    execute(createMarkupButtons( "Soon..."), null);//todo davomi bor
+                    map.put(userChatId,"Feedback");
+
+                    break;
+                case "Call me":
+                    // todo telefon raqamga tekshirish
+                    Optional<User> userEn = userService.findUserByChatId(update);
+                    User userEn1 = new User();
+                    if (userEn.isPresent()){
+                        userEn1 = userEn.get();
+                    }
+                    if (userEn1.getPhoneNumber() == null || userEn1.getPhoneNumber().equals("") || userEn1.getPhoneNumber().trim().equals("")){
+                        SendMessage sendMessage = new SendMessage();
+                        sendMessage.setChatId(String.valueOf(userChatId));
+                        sendMessage.setText("Please send your contact");
+                        shareContact(sendMessage, "en");
+                        map.put(userChatId, "Call me");
+                    } else {
+                        String message = userEn1.getUsername() + "\n" + userEn1.getPhoneNumber() + "\n\n" + update.getMessage().getText();
+                        userMessage = "The operators will call you back soon";
+                        String groupChatId = this.groupChatId;
+                        execute(groupChatId, message);
+                        execute(new SendMessage(String.valueOf(this.userChatId), userMessage));
+                        //backStepMessage = "\uD83C\uDDF7\uD83C\uDDFA Русский";
+                        update.getMessage().setText("Feedback");
+                        onUpdateReceived(update);
+                    }
+                    break;
+
                 case "Commercial proposal":
                     userMessage = "Commercial proposal";
                     execute(createMarkupButtons("Back"), null);
