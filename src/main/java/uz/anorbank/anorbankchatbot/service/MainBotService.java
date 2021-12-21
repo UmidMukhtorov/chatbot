@@ -414,15 +414,15 @@ public class MainBotService extends TelegramLongPollingBot implements BaseBotSer
                     execute(installmentCardUz.get(0), installmentCardUz.get(1), installmentCardUz.get(2), installmentCardUz.get(3), installmentCardUz.get(4));
                     map.put(userChatId, "Карты");
                     break;
-                case "Карта TRIA":
-                    userMessage = "Карта TRIA";
+                case "Карта Триа ":
+                    userMessage = "Карта Триа ";
                     execute(createMarkupButtons("Назад"), null);
                     List<String> triaCard = CardService.getTriaCard("");
                     execute(triaCard.get(0), triaCard.get(1), triaCard.get(2), triaCard.get(3), triaCard.get(4));
                     map.put(userChatId, "Карты");
                     break;
-                case "Карта 2 в 1 \"MASTERCARD - HUMO\"":
-                    userMessage = "Карта 2 в 1 \"MASTERCARD - HUMO\"";
+                case "Кобейджинговая карта Humo-Master card":
+                    userMessage = "Кобейджинговая карта Humo-Master card";
                     execute(createMarkupButtons("Назад"), null);
                     List<String> masterCard = CardService.getMasterCard("");
                     execute(masterCard.get(0), masterCard.get(1), masterCard.get(2), masterCard.get(3), masterCard.get(4));
@@ -615,10 +615,10 @@ public class MainBotService extends TelegramLongPollingBot implements BaseBotSer
                 case "\uD83C\uDDFA\uD83C\uDDFF O'zbekcha":
                     userMessage = "Assalomu alaykum! Sizga qanday yordam berishimiz mumkin?";
                     userService.saveUserLanguage(update, "uz");
-                    execute(createMarkupButtons("Maslahat", "Aloqa", "Orqaga"), null);
+                    execute(createMarkupButtons("Ma'lumot olish ", "Qayta aloqa", "Orqaga qaytish"), null);
                     map.put(userChatId, "/start");
                     break;
-                case "Orqaga":
+                case "Orqaga qaytish":
                     update.getMessage().setText(map.get(userChatId) != null && map.get(userChatId) != "" ? map.get(userChatId) : "/start");
                     onUpdateReceived(update);
                     break;
@@ -627,92 +627,92 @@ public class MainBotService extends TelegramLongPollingBot implements BaseBotSer
                     update.getMessage().setText(map.get(userChatId) != null && map.get(userChatId) != "" ? map.get(userChatId) : "/start");
                     onUpdateReceived(update);
                     break;
-                case "Maslahat":
-                    userMessage = "Sizning huquqiy maqomingiz qanday?";
-                    execute(createMarkupButtons("Jismoniy shaxs", "Yuridik shaxs", "Orqaga"), null);
+                case "Ma'lumot olish ":
+                    userMessage = "Siz yuridik shaxs yoki jismoniy shaxsmisiz?";
+                    execute(createMarkupButtons("Jismoniy shaxs", "Yuridik shaxs", "Orqaga qaytish"), null);
                     map.put(userChatId, "\uD83C\uDDFA\uD83C\uDDFF O'zbekcha");
                     break;
                 case "Jismoniy shaxs":
                     userMessage = "Sizning huquqiy maqomingiz?";
-                    execute(createMarkupButtons("Kartalar", "Kreditlar", "Omonatlar", "Avtokredit", "Manzillar", "Savolingizga javob olmadingizmi ?", "Orqaga"), null);
-                    map.put(userChatId, "Maslahat");
+                    execute(createMarkupButtons("Kartalar", "Kreditlar", "Omonatlar", "Avtokredit", "Manzillar", "Kerakli javob olaolmadim", "Orqaga qaytish"), null);
+                    map.put(userChatId, "Ma'lumot olish ");
                     break;
-                case "Savolingizga javob olmadingizmi ?":
+                case "Kerakli javob olaolmadim":
                     userMessage = "Savolingizga javob olmadingizmi ?";
                     update.getMessage().setText("Menga qo'ng'iroq qiling");
                     onUpdateReceived(update);
                     break;
                 case "Manzillar":
                     userMessage = "Manzillar";
-                    execute(createMarkupButtons("Bosh ofis manzili", "Tayanch nuqtalar", "Savdo nuqtalari manzillari", "Orqaga"), null);
+                    execute(createMarkupButtons("Bosh ofis manzili", "Tayanch nuqtalar", "Savdo nuqtalari manzillari", "Orqaga qaytish"), null);
                     map.put(userChatId,"Jismoniy shaxs");
                     break;
                 case "Bosh ofis manzili":
                     userMessage = "Bosh ofis manzili";
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     List<String> addressOffice1 = AboutBankService.getAddressOfficeBank("uz");
                     execute(addressOffice1.get(0), addressOffice1.get(1), addressOffice1.get(2), addressOffice1.get(3));
                     map.put(userChatId,"Manzillar");
                     break;
                 case "Savdo nuqtalari manzillari":
                     userMessage = "Savdo nuqtalari manzillari"; //todo https://www.anorbank.uz/atms/#sales
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     List<String> addressOfficeg1 = ATMSServices.getATMS("uz");
                     execute(addressOfficeg1.get(0), addressOfficeg1.get(1), addressOfficeg1.get(2), addressOfficeg1.get(3));
                     map.put(userChatId,"Manzillar");
                     break;
                 case "Tasdiqlash":      //todo manashu case ni bossa contactni share qilishi kerak
                     userMessage = "Iloji boricha tezroq aloqa markazi mutaxassisi qo'shimcha maslahat olish uchun siz bilan bog'lanadi";
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     map.put(userChatId, "/start");
                     break;
                 case "Arizani bekor qilish":
                     userMessage = "Arizani bekor qilish";
-                    update.getMessage().setText("Aloqa");
+                    update.getMessage().setText("Qayta aloqa");
                     onUpdateReceived(update);
                     break;
-                case "Aloqa":
-                    userMessage = "Aloqa";
-                    execute(createMarkupButtons("Menga qo'ng'iroq qiling", "Fikr/taklif qoldiring", "Tijorat taklif", "Bank bo'sh ish o'rinlari", "Orqaga"), null);
+                case "Qayta aloqa":
+                    userMessage = "Qayta aloqa";
+                    execute(createMarkupButtons("Menga qo'ng'iroq qiling", "Fikr/taklif qoldiring", "Tijorat taklif", "Bank bo'sh ish o'rinlari", "Orqaga qaytish"), null);
                     map.put(userChatId,"\uD83C\uDDFA\uD83C\uDDFF O'zbekcha");
                     break;
                 case "Tijorat taklif":
                     userMessage = "Tijorat taklif";
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     List<String> commercialProposalUz = AboutVacanciesService.getCommercialProposal("uz");
                     execute1(commercialProposalUz.get(0), commercialProposalUz.get(1));
-                    map.put(userChatId, "Aloqa");
+                    map.put(userChatId, "Qayta aloqa");
                     break;
                 case "Bank bo'sh ish o'rinlari":
                     userMessage = "Bank bo'sh ish o'rinlari";
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     List<String> vacanciesUz = AboutVacanciesService.getAboutVacancies("uz");
                     execute(vacanciesUz.get(0), vacanciesUz.get(1), vacanciesUz.get(2), vacanciesUz.get(3), vacanciesUz.get(4));
-                    map.put(userChatId,"Aloqa");
+                    map.put(userChatId,"Qayta aloqa");
                     break;
                 case "Fikr/taklif qoldiring":
                     userMessage = "Fikr/taklif qoldiring";
                     execute(createMarkupButtons( "Tez kunda..."), null);//todo davomi bor
-                    map.put(userChatId,"Aloqa");
+                    map.put(userChatId,"Qayta aloqa");
                     break;
                 case "Bank xizmati":
                     userMessage = "Fikr-mulohazalarni matn yoki audio xabar sifatida qoldiring";
-                    execute(createMarkupButtons("Yuborish", "Orqaga"), null);//todo davomi bor
+                    execute(createMarkupButtons("Yuborish", "Orqaga qaytish"), null);//todo davomi bor
                     map.put(userChatId, "Men shikoyat qilmoqchiman");
                     break;
                 case "Bank mahsulotlari":
                     userMessage = "Fikr-mulohazalarni matn yoki audio xabar sifatida qoldiring";
-                    execute(createMarkupButtons("Yuborish", "Orqaga"), null);//todo davomi bor
+                    execute(createMarkupButtons("Yuborish", "Orqaga qaytish"), null);//todo davomi bor
                     map.put(userChatId,"Men shikoyat qilmoqchiman");
                     break;
                 case "Bank xodimi":
                     userMessage = "Fikr-mulohazalarni matn yoki audio xabar sifatida qoldiring";
-                    execute(createMarkupButtons("Yuborish", "Orqaga"), null);//todo davomi bor
+                    execute(createMarkupButtons("Yuborish", "Orqaga qaytish"), null);//todo davomi bor
                     map.put(userChatId,"Men shikoyat qilmoqchiman");
                     break;
                 case "Hamma narsa yoqdi 5":
                     userMessage = "Fikr-mulohazalarni matn yoki audio xabar sifatida qoldiring";
-                    execute(createMarkupButtons("Yuborish", "Orqaga"), null);//todo davomi bor
+                    execute(createMarkupButtons("Yuborish", "Orqaga qaytish"), null);//todo davomi bor
                     map.put(userChatId, "Fikr/taklif qoldiring");
                     break;
                 case "Yaxshi 4":
@@ -732,12 +732,12 @@ public class MainBotService extends TelegramLongPollingBot implements BaseBotSer
                     break;
                 case "Men shikoyat qilmoqchiman":
                     userMessage = "Eng ko'p nimani yoqtirmadingiz? ";
-                    execute(createMarkupButtons("Bank xizmati", "Bank mahsulotlari", "Bank xodimi", "Orqaga"), null);//todo davomi bor
+                    execute(createMarkupButtons("Bank xizmati", "Bank mahsulotlari", "Bank xodimi", "Orqaga qaytish"), null);//todo davomi bor
                     map.put(userChatId, "Fikr/taklif qoldiring");
                     break;
                 case "Yuborish":
                     userMessage = "Yuborildi! \n Fikr-mulohaza uchun rahmat ";
-                    execute(createMarkupButtons("Orqaga"), null);//todo davomi bor
+                    execute(createMarkupButtons("Orqaga qaytish"), null);//todo davomi bor
                     map.put(userChatId,"/start");
                     break;
                 case "Menga qo'ng'iroq qiling":
@@ -761,7 +761,7 @@ public class MainBotService extends TelegramLongPollingBot implements BaseBotSer
                     execute(groupChatId, message);
                     execute(new SendMessage(String.valueOf(this.userChatId), userMessage));
                     //backStepMessage = "\uD83C\uDDF7\uD83C\uDDFA Русский";
-                    update.getMessage().setText("Aloqa");
+                    update.getMessage().setText("Qayta aloqa");
                     onUpdateReceived(update);
                 }
                 break;
@@ -785,26 +785,26 @@ public class MainBotService extends TelegramLongPollingBot implements BaseBotSer
                 case "Kartalar":
                     userMessage = "Kartalar ro`yxati:";
                     List<String> cardName1 = CardService.getCardName("uz");
-                    execute(createMarkupButtons(cardName1.get(0), cardName1.get(1), cardName1.get(2), "Orqaga"), null);
+                    execute(createMarkupButtons(cardName1.get(0), cardName1.get(1), cardName1.get(2), "Orqaga qaytish"), null);
                     map.put(userChatId,"Jismoniy shaxs");
                     break;
-                case "ANOR muddatli to’lov kartasi":
-                    userMessage = "ANOR muddatli to’lov kartasi”";
-                    execute(createMarkupButtons("Orqaga"), null);
+                case "Muddatli to’lov kartasi":
+                    userMessage = "Muddatli to’lov kartasi”";
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     List<String> installmentCard = CardService.getInstallmentCard("uz");
                     execute(installmentCard.get(0), installmentCard.get(1), installmentCard.get(2), installmentCard.get(3), installmentCard.get(4));
                     map.put(userChatId,"Kartalar");
                     break;
                 case "TRIA kartasi":
                     userMessage = "TRIA kartasi”";
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     List<String> triaCardUz = CardService.getTriaCard("uz");
                     execute(triaCardUz.get(0), triaCardUz.get(1), triaCardUz.get(2), triaCardUz.get(3), triaCardUz.get(4));
                     map.put(userChatId,"Kartalar");
                     break;
-                case "\"MASTERCARD - HUMO\" 2-tasi 1-da":
-                    userMessage = "\"MASTERCARD - HUMO\" 2-tasi 1-da";
-                    execute(createMarkupButtons("Orqaga"), null);
+                case "Kobeydjing Humo-Mastercard kartasi ":
+                    userMessage = "Kobeydjing Humo-Mastercard kartasi ";
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     List<String> masterCardUz = CardService.getMasterCard("uz");
                     execute(masterCardUz.get(0), masterCardUz.get(1), masterCardUz.get(2), masterCardUz.get(3), masterCardUz.get(4));
                     map.put(userChatId,"Kartalar");
@@ -813,33 +813,33 @@ public class MainBotService extends TelegramLongPollingBot implements BaseBotSer
                 case "Kreditlar":
                     userMessage = "Kreditlar ro`yxati";
                     List<String> creditsName = CreditService.getCreditsName("uz");
-                    execute(createMarkupButtons(creditsName.get(0), creditsName.get(1), creditsName.get(2), creditsName.get(3), "Orqaga"), null);
+                    execute(createMarkupButtons(creditsName.get(0), creditsName.get(1), creditsName.get(2), creditsName.get(3), "Orqaga qaytish"), null);
                     map.put(userChatId,"Jismoniy shaxs");
                     break;
                 case "Onlayn mikroqarz":
                     userMessage = "Onlayn mikroqarz";
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     List<String> microloanCreditUz = CreditService.getMicroloanCredit("uz");
                     execute(microloanCreditUz.get(0), microloanCreditUz.get(1), microloanCreditUz.get(2), microloanCreditUz.get(3), microloanCreditUz.get(4));
                     map.put(userChatId,"Kreditlar");
                     break;
                 case "Oson pullar 2.0":
                     userMessage = "Oson pullar";
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     List<String> availableCreditUz = CreditService.getAvailableCredit("uz");
                     execute(availableCreditUz.get(0), availableCreditUz.get(1), availableCreditUz.get(2), availableCreditUz.get(3), availableCreditUz.get(4));
                     map.put(userChatId,"Kreditlar");
                     break;
                 case "Xaridlar uchun muddatli to’lov":
                     userMessage = "Xaridlar uchun muddatli to’lov";
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     List<String> installmentsCreditUz = CreditService.getInstallmentsCredit("uz");
                     execute(installmentsCreditUz.get(0), installmentsCreditUz.get(1), installmentsCreditUz.get(2), installmentsCreditUz.get(3), installmentsCreditUz.get(4));
                     map.put(userChatId, "Kreditlar");
                     break;
                 case "Barcha holatlar uchun overdraft":
                     userMessage = "Xaridlar uchun muddatli to’lov";
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     List<String> overdraftCreditUz = CreditService.getOverdraftCredit("uz");
                     execute(overdraftCreditUz.get(0), overdraftCreditUz.get(1), overdraftCreditUz.get(2), overdraftCreditUz.get(3), overdraftCreditUz.get(4));
                     map.put(userChatId, "Kreditlar");
@@ -848,33 +848,33 @@ public class MainBotService extends TelegramLongPollingBot implements BaseBotSer
                 case "Omonatlar":
                     userMessage = "Omonatlar ro`yxati";
                     List<String> depositsNameUz = DepositService.getDepositName("uz");
-                    execute(createMarkupButtons(depositsNameUz.get(0), depositsNameUz.get(1), depositsNameUz.get(3), "Orqaga"), null);
+                    execute(createMarkupButtons(depositsNameUz.get(0), depositsNameUz.get(1), depositsNameUz.get(3), "Orqaga qaytish"), null);
                     map.put(userChatId, "Jismoniy shaxs");
                     break;
                 case "\"SMART 2.0\" omonati":
                     userMessage = "\"SMART 2.0\" omonati";
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     List<String> smartDepositUz = DepositService.getSmartDeposit("uz");
                     execute(smartDepositUz.get(0), smartDepositUz.get(1), smartDepositUz.get(2), smartDepositUz.get(3), smartDepositUz.get(4));
                     map.put(userChatId,"Omonatlar");
                     break;
                 case "\"SHOSHILMASDAN 2.0\" omonati":
                     userMessage = "\"SHOSHILMASDAN 2.0\" omonati";
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     List<String> shoshilmasdanDepositUz = DepositService.getShoshilmasdanDeposit("uz");
                     execute(shoshilmasdanDepositUz.get(0), shoshilmasdanDepositUz.get(1), shoshilmasdanDepositUz.get(2), shoshilmasdanDepositUz.get(3), shoshilmasdanDepositUz.get(4));
                     map.put(userChatId, "Omonatlar");
                     break;
                 case "«Go» omonati":
                     userMessage = "«Go» omonati";
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     List<String> goDepositUz = DepositService.getGoDeposit("uz");
                     execute(goDepositUz.get(0), goDepositUz.get(1), goDepositUz.get(2), goDepositUz.get(3), goDepositUz.get(4));
                     map.put(userChatId,"Omonatlar");
                     break;
                 case "Avtokredit":
                     userMessage = "Avtokredit";
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     List<String> autoCreditUz = AutoCredit.getAutoCredit("uz");
                     execute1(autoCreditUz.get(0), autoCreditUz.get(1));
                     map.put(userChatId,"Jismoniy shaxs");
@@ -887,7 +887,7 @@ public class MainBotService extends TelegramLongPollingBot implements BaseBotSer
                     break;
                 case "Andijon":
                     userMessage = "Andijon";
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     List<String> getandijanUz = AboutBankService.getAndijan("uz");
                     execute(getandijanUz.get(0), getandijanUz.get(1), getandijanUz.get(2), getandijanUz.get(3));
                     map.put(userChatId,"Tayanch nuqtalar");
@@ -895,210 +895,210 @@ public class MainBotService extends TelegramLongPollingBot implements BaseBotSer
                 case "Angren⠀":
                     userMessage = "Angren";
                     List<String> getangrenUz = AboutBankService.getAngren("uz");
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     execute(getangrenUz.get(0), getangrenUz.get(1), getangrenUz.get(2), getangrenUz.get(3));
                     map.put(userChatId,"Tayanch nuqtalar");
                     break;
                 case "Buxoro":
                     userMessage = "Buxoro";
                     List<String> getbuxaraUz = AboutBankService.getBuxara("uz");
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     execute(getbuxaraUz.get(0), getbuxaraUz.get(1), getbuxaraUz.get(2), getbuxaraUz.get(3));
                     map.put(userChatId, "Tayanch nuqtalar");
                     break;
                 case "Jizzax":
                     userMessage = "Jizzax";
                     List<String> getjizzaxUz = AboutBankService.getJizzax("uz");
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     execute(getjizzaxUz.get(0), getjizzaxUz.get(1), getjizzaxUz.get(2), getjizzaxUz.get(3));
                     map.put(userChatId, "Tayanch nuqtalar");
                     break;
                 case "Qarshi":
                     userMessage = "Qarshi";
                     List<String> getkarshiUz = AboutBankService.getKarshi("uz");
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     execute(getkarshiUz.get(0), getkarshiUz.get(1), getkarshiUz.get(2), getkarshiUz.get(3));
                     map.put(userChatId, "Tayanch nuqtalar");
                     break;
                 case "Namangan⠀":
                     userMessage = "Namangan";
                     List<String> getnamanganUz = AboutBankService.getNamangan("uz");
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     execute(getnamanganUz.get(0), getnamanganUz.get(1), getnamanganUz.get(2), getnamanganUz.get(3));
                     map.put(userChatId,"Tayanch nuqtalar");
                     break;
                 case "Navoiy":
                     userMessage = "Navoiy";
                     List<String> getnavaiUz = AboutBankService.getNavai("uz");
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     execute(getnavaiUz.get(0), getnavaiUz.get(1), getnavaiUz.get(2), getnavaiUz.get(3));
                     map.put(userChatId,"Tayanch nuqtalar");
                     break;
                 case "Qoraqalpog'iston Respublikasi":
                     userMessage = "Qoraqalpog'iston Respublikasi";
                     List<String> getnukusUz = AboutBankService.getKarakalpak("uz");
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     execute(getnukusUz.get(0), getnukusUz.get(1), getnukusUz.get(2), getnukusUz.get(3));
                     map.put(userChatId, "Tayanch nuqtalar");
                     break;
                 case "Samarqand":
                     userMessage = "Samarqand";
                     List<String> getsamUz = AboutBankService.getSamarkand("uz");
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     execute(getsamUz.get(0), getsamUz.get(1), getsamUz.get(2), getsamUz.get(3));
                     map.put(userChatId,"Tayanch nuqtalar");
                     break;
                 case "Sirdaryo":
                     userMessage = "Sirdaryo";
                     List<String> getsirdaryaUz = AboutBankService.getSirdarya("uz");
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     execute(getsirdaryaUz.get(0), getsirdaryaUz.get(1), getsirdaryaUz.get(2), getsirdaryaUz.get(3));
                     map.put(userChatId,"Tayanch nuqtalar");
                     break;
                 case "Termiz":
                     userMessage = "Termiz";
                     List<String> gettermizUz = AboutBankService.getTermiz("uz");
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     execute(gettermizUz.get(0), gettermizUz.get(1), gettermizUz.get(2), gettermizUz.get(3));
                     map.put(userChatId, "Tayanch nuqtalar");
                     break;
                 case "Urganch":
                     userMessage = "Urganch";
                     List<String> geturgenchUz = AboutBankService.getUrgench("uz");
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     execute(geturgenchUz.get(0), geturgenchUz.get(1), geturgenchUz.get(2), geturgenchUz.get(3));
                     map.put(userChatId, "Tayanch nuqtalar");
                     break;
                 case "Chirchiq":
                     userMessage = "Chirchiq";
                     List<String> getchirchikUz = AboutBankService.getChirchik("uz");
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     execute(getchirchikUz.get(0), getchirchikUz.get(1), getchirchikUz.get(2), getchirchikUz.get(3));
                     map.put(userChatId, "Tayanch nuqtalar");
                     break;
                 case "Farg'ona":
                     userMessage = "Farg'ona";
                     List<String> getferganaUz = AboutBankService.getFergana("uz");
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     execute(getferganaUz.get(0), getferganaUz.get(1), getferganaUz.get(2), getferganaUz.get(3));
                     map.put(userChatId,"Tayanch nuqtalar");
                     break;
                 /************************************************Yuridik shaxs****************************************************************************/
                 case "Yuridik shaxs":
                     userMessage = "Yuridik shaxs";
-                    execute(createMarkupButtons("Hisob-kitob xizmati (so'm)",
-                            "Hisob-kitob xizmati (valyuta)", "Depozitlar", "Ish haqi loyihasi",
-                            "Tijorat taklif olish istayman", "“Anor Merchant” Hamkorlik dasturi",
-                            "Korporativ kartani buyurtma qiling", "Orqaga"), null);
+                    execute(createMarkupButtons("Hisob raqam ochish (so'm valyuta)",
+                            "Hisob raqam ochish (xorijiy valyuta)", "Depozitlar", "Oylik maosh loyihasi",
+                            "Tijoriy taklif olish", "“Anor Merchant” Hamkorlik dasturi",
+                            "Korporativ kartani buyurtma qiling", "Orqaga qaytish"), null);
                     map.put(userChatId,"Maslahat");
                     break;
-                case "Hisob-kitob xizmati (so'm)":
-                    userMessage = "Hisob-kitob xizmati (so'm)";
-                    execute(createMarkupButtons("Yuridik shaxs⠀", "Yakka tartibdagi tadbirkor", "Orqaga"), null);
+                case "Hisob raqam ochish (so'm valyuta)":
+                    userMessage = "Hisob raqam ochish (so'm valyuta)";
+                    execute(createMarkupButtons("Yuridik shaxs⠀", "Yakka tartibdagi tadbirkor", "Orqaga qaytish"), null);
                     map.put(userChatId, "Yuridik shaxs");
                     break;
-                case "Hisob-kitob xizmati (valyuta)":
-                    userMessage = "Hisob-kitob xizmati (valyuta)";
-                    execute(createMarkupButtons("Yuridik shaxs⠀⠀", "Yakka tartibdagi tadbirkor⠀", "Orqaga"), null);
+                case "Hisob raqam ochish (xorijiy valyuta)":
+                    userMessage = "Hisob raqam ochish (xorijiy valyuta)";
+                    execute(createMarkupButtons("Yuridik shaxs⠀⠀", "Yakka tartibdagi tadbirkor⠀", "Orqaga qaytish"), null);
                     map.put(userChatId,"Yuridik shaxs");
                     break;
                 case "Yuridik shaxs⠀":
                     userMessage = "Yuridik shaxs";
                     List<String> getBusinessRate1 = SettlementServices.getBusinessRates("uz");
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     execute(getBusinessRate1.get(0), getBusinessRate1.get(1), getBusinessRate1.get(2), getBusinessRate1.get(3));
-                    map.put(userChatId, "Hisob-kitob xizmati (so'm)");
+                    map.put(userChatId, "Hisob raqam ochish (so'm valyuta)");
                     break;
                 case "Yuridik shaxs⠀⠀":
                     userMessage = "Yuridik shaxs";
                     List<String> getBusinessRateValyut1 = SettlementServices.getBusinessRates("uz");
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     execute(getBusinessRateValyut1.get(0), getBusinessRateValyut1.get(1), getBusinessRateValyut1.get(2), getBusinessRateValyut1.get(3));
-                    map.put(userChatId, "Hisob-kitob xizmati (valyuta)");
+                    map.put(userChatId, "Hisob raqam ochish (xorijiy valyuta)");
                     break;
                 case "Yakka tartibdagi tadbirkor":
                     userMessage = "Yakka tartibdagi tadbirkor";
                     List<String> getBusinessRates1 = SettlementServices.getBusinessRates("uz");
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     execute(getBusinessRates1.get(0), getBusinessRates1.get(1), getBusinessRates1.get(2), getBusinessRates1.get(3));
-                    map.put(userChatId, "Hisob-kitob xizmati (so'm)");
+                    map.put(userChatId, "Hisob raqam ochish (so'm valyuta)");
                     break;
                 case "Yakka tartibdagi tadbirkor⠀":
                     userMessage = "Yakka tartibdagi tadbirkor";
                     List<String> getBusinessRatesValyut1 = SettlementServices.getBusinessRates("uz");
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     execute(getBusinessRatesValyut1.get(0), getBusinessRatesValyut1.get(1), getBusinessRatesValyut1.get(2), getBusinessRatesValyut1.get(3));
-                    map.put(userChatId, "Hisob-kitob xizmati (valyuta)");
+                    map.put(userChatId, "Hisob raqam ochish (xorijiy valyuta)");
                     break;
                 case "Yuridik shaxs⠀⠀⠀":
                     userMessage = "Yuridik shaxs";
-                    execute(createMarkupButtons("\"Overnayt\" omonati", "Muddatli omonati", "Orqaga"), null);
+                    execute(createMarkupButtons("\"Overnayt\" omonati", "Muddatli omonati", "Orqaga qaytish"), null);
                     map.put(userChatId, "Depozitlar");
                     break;
                 case "«Overnayt omonati»":
                     userMessage = "\"Overnayt\" omonati";
                     List<String> depositName1 = BusinessDeposit.getOverNightDeposit("");
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     execute(depositName1.get(0), depositName1.get(1), depositName1.get(2), depositName1.get(3));
                     map.put(userChatId,"Yuridik shaxs⠀⠀⠀");
                     break;
                 case "Muddatli depozit":
                     userMessage = "Muddatli depozit";
                     List<String> deposittName1 = BusinessDeposit.getFixedTermDeposit("uz");
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     execute(deposittName1.get(0), deposittName1.get(1), deposittName1.get(2), deposittName1.get(3));
                     map.put(userChatId,"Yuridik shaxs⠀⠀⠀");
                     break;
                 case "Yakka tartibdagi tadbirkor⠀⠀":
                     userMessage = "Индивидуальный предприниматель";
-                    execute(createMarkupButtons("\"Overnayt\" omonati", "Muddatli depozit", "Orqaga"), null);
+                    execute(createMarkupButtons("\"Overnayt\" omonati", "Muddatli depozit", "Orqaga qaytish"), null);
                     map.put(userChatId,"Depozitlar");
                     break;
                 case "\"Overnayt\" omonati":
                     userMessage = "\"Overnayt\" omonati";
                     List<String> depositNamee1 = BusinessDeposit.getOverNightDeposit("uz");
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     execute(depositNamee1.get(0), depositNamee1.get(1), depositNamee1.get(2), depositNamee1.get(3));
                     map.put(userChatId,"Yakka tartibdagi tadbirkor⠀⠀");
                     break;
                 case "Muddatli⠀depozit":
                     userMessage = "Muddatli⠀depozit";
                     List<String> deposittNamee1 = BusinessDeposit.getFixedTermDeposit("uz");
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     execute(deposittNamee1.get(0), deposittNamee1.get(1), deposittNamee1.get(2), deposittNamee1.get(3));
                     map.put(userChatId, "Yakka tartibdagi tadbirkor⠀⠀");
                     break;
-                case "Ish haqi loyihasi":
+                case "Oylik maosh loyihasi":
                     userMessage = "“Anor Merchant” Hamkorlik dasturi";
                     List<String> payrollProgramme1 = SettlementServices.getBusinessPayrollprogramme("uz");
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     execute(payrollProgramme1.get(0), payrollProgramme1.get(1), payrollProgramme1.get(2), payrollProgramme1.get(3));
                     map.put(userChatId,"Yuridik shaxs");
                     break;
-                case "Tijorat taklif olish istayman":
-                    userMessage = "Tijorat taklif olish istayman";
+                case "Tijoriy taklif olish":
+                    userMessage = "Tijoriy taklif olish";
                     List<String> documents1 = BusinessDeposit.getDocuments("uz");
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     execute(documents1.get(0), documents1.get(1), documents1.get(2), documents1.get(3));
                     map.put(userChatId,"Yuridik shaxs");
                     break;
                 case "“Anor Merchant” Hamkorlik dasturi":
                     userMessage = "“Anor Merchant” Hamkorlik dasturi";
                     List<String> businesPartner1 = BusinessPartner.businessPartner("uz");
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     execute(businesPartner1.get(0), businesPartner1.get(1), businesPartner1.get(2), businesPartner1.get(3), businesPartner1.get(4));
                     map.put(userChatId,"Yuridik shaxs");
                     break;
                 case "Korporativ kartani buyurtma qiling":
                     userMessage = "Korporativ kartani buyurtma qiling";
                     List<String> corporateCards1 = SettlementServices.getBusinessCorporateCards("uz");
-                    execute(createMarkupButtons("Orqaga"), null);
+                    execute(createMarkupButtons("Orqaga qaytish"), null);
                     execute(corporateCards1.get(0), corporateCards1.get(1), corporateCards1.get(2), corporateCards1.get(3));
                     map.put(userChatId, "Yuridik shaxs");
                     break;
                 case "Depozitlar":
                     userMessage = "Depozitlar";
-                    execute(createMarkupButtons("Yuridik shaxs⠀⠀⠀", "Yakka tartibdagi tadbirkor⠀⠀", "Orqaga"), null);
+                    execute(createMarkupButtons("Yuridik shaxs⠀⠀⠀", "Yakka tartibdagi tadbirkor⠀⠀", "Orqaga qaytish"), null);
                     map.put(userChatId,"Yuridik shaxs");
                     break;
                 //********************************English********************************************//
