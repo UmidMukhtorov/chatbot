@@ -613,7 +613,7 @@ public class MainBotService extends TelegramLongPollingBot implements BaseBotSer
                 //********************************O'zbekcha********************************************//
 
                 case "\uD83C\uDDFA\uD83C\uDDFF O'zbekcha":
-                    userMessage = "O'zbek tili tanlandi";
+                    userMessage = "Assalomu alaykum! Sizga qanday yordam berishimiz mumkin?";
                     userService.saveUserLanguage(update, "uz");
                     execute(createMarkupButtons("Maslahat", "Aloqa", "Orqaga"), null);
                     map.put(userChatId, "/start");
